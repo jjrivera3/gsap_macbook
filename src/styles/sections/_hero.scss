@@ -1,0 +1,18 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+/* ----------------------------------------
+   Hero Section
+   ---------------------------------------- */
+.hero {
+  @include container; // centers within 1170px width
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  color: $text;
+  position: relative;
+  overflow: hidden;
+}

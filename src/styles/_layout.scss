@@ -1,0 +1,13 @@
+@use './mixins';
+
+.page {
+  @include mixins.container(1100px);
+  padding-block: 32px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}

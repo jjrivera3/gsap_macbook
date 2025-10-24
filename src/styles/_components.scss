@@ -1,0 +1,15 @@
+@use './variables' as *;
+@use './functions' as fn;
+
+.button {
+  appearance: none;
+  border: 0;
+  border-radius: 8px;
+  padding: fn.rem(12) fn.rem(16);
+  background: $primary;
+  color: white;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease;
+  &:hover { background: $primary-700; }
+  &:active { transform: translateY(1px); }
+}

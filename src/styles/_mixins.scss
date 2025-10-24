@@ -1,0 +1,44 @@
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+
+// Container mixin (default 1170px)
+@mixin container($max: 1170px) {
+  width: 100%;
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+// Media query mixins
+@mixin max-sm {
+  @media (max-width: #{$breakpoint-sm - 1}) {
+    @content;
+  }
+}
+
+@mixin max-md {
+  @media (max-width: #{$breakpoint-md - 1}) {
+    @content;
+  }
+}
+
+@mixin max-lg {
+  @media (max-width: #{$breakpoint-lg - 1}) {
+    @content;
+  }
+}
+
+// Example: Responsive typography helper
+@mixin responsive-text($small, $medium, $large) {
+  font-size: $small;
+
+  @include md {
+    font-size: $medium;
+  }
+
+  @include lg {
+    font-size: $large;
+  }
+}

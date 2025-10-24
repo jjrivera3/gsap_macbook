@@ -1,0 +1,20 @@
+@use "./variables" as *;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: $font-sans;
+  font-size: $font-size-base;
+  background: $surface;
+  color: $text;
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+}
+a:hover {
+  color: $primary-700;
+}
