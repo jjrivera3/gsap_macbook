@@ -2,17 +2,53 @@
 @use "../mixins" as *;
 
 /* ----------------------------------------
-   Hero Section
+   Hero Section 
    ---------------------------------------- */
-.hero {
-  @include container; // centers within 1170px width
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
-  color: $text;
-  position: relative;
-  overflow: hidden;
+
+#hero-section {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    color: $text;
+
+    &__content {
+      @include container;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    &__cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2rem;
+      gap: 15px;
+    }
+
+    &__buy-btn {
+      display: inline-block;
+      margin-top: -50px;
+      margin-bottom: 15px;
+    }
+
+    &__price {
+      font-size: 1rem;
+      color: $text;
+    }
+
+    &__video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+  }
 }
