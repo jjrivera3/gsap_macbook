@@ -34,10 +34,6 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-
-    @media (min-width: 1536px) {
-      bottom: 13rem;
-    }
   }
 
   &__info {
