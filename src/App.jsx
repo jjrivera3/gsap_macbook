@@ -14,6 +14,7 @@ const App = () => {
       <Hero />
       <ProductViewer />
       <Showcase />
+      <Performance />
     </main>
   );
 };
