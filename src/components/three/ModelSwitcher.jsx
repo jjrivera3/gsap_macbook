@@ -15,6 +15,7 @@ const setMeshesOpacity = (group, opacity) => {
   group.traverse((child) => {
     if (child.isMesh && child.material) {
       child.material.transparent = true;
+      // set instantly for initial state
       gsap.set(child.material, { opacity });
     }
   });
@@ -39,15 +40,16 @@ const moveGroup = (group, x, immediate = false) => {
   }
 };
 
-const ModelSwitcher = ({ rawScale, displayScale, isMobile }) => {
+const ModelSwitcher = ({ scale, isMobile }) => {
   const smallRef = useRef();
   const largeRef = useRef();
   const didInit = useRef(false);
 
-  // Treat >= 0.095 as 16", otherwise 14"
-  const showLargeMacbook = rawScale >= 0.095;
+  // This boolean may be true on mount (e.g., 0.05 or 0.08),
+  // but we still want to start with the 14".
+  const showLargeMacbook = scale === 0.08 || scale === 0.05;
 
-  // Always start on the 14" small model
+  // Initial state: always show SMALL (14") on load
   useGSAP(() => {
     moveGroup(smallRef.current, 0, true);
     moveGroup(largeRef.current, -OFFSET_DISTANCE, true);
@@ -56,12 +58,12 @@ const ModelSwitcher = ({ rawScale, displayScale, isMobile }) => {
     didInit.current = true;
   }, []);
 
-  // Animate when selection changes
+  // Switch on updates, but skip the very first run
   useGSAP(
     () => {
       if (!didInit.current) return;
 
-      if (showLargeMacbook) {
+      if (!showLargeMacbook) {
         moveGroup(smallRef.current, -OFFSET_DISTANCE);
         moveGroup(largeRef.current, 0);
         fadeMeshes(smallRef.current, 0);
@@ -88,14 +90,10 @@ const ModelSwitcher = ({ rawScale, displayScale, isMobile }) => {
     <PresentationControls {...controlsConfig}>
       <group>
         <group ref={largeRef}>
-          <MacbookModel16
-            scale={isMobile ? displayScale - 0.02 : displayScale}
-          />
+          <MacbookModel16 scale={isMobile ? 0.05 : 0.08} />
         </group>
         <group ref={smallRef}>
-          <MacbookModel14
-            scale={isMobile ? displayScale - 0.05 : displayScale - 0.02}
-          />
+          <MacbookModel14 scale={isMobile ? 0.03 : 0.06} />
         </group>
       </group>
     </PresentationControls>

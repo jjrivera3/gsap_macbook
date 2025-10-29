@@ -1,19 +1,16 @@
-import { Canvas } from "@react-three/fiber";
-import { useMediaQuery } from "react-responsive";
 import useMacbookStore from "../store";
 import "../styles/sections/_product-viewer.scss";
-import ModelSwitcher from "./three/ModelSwitcher";
+import { Canvas } from "@react-three/fiber";
+import { Box, OrbitControls } from "@react-three/drei";
+import MacbookModel14 from "./models/Macbook-14";
 import StudioLights from "./three/StudioLights";
+import ModelSwitcher from "./three/ModelSwitcher";
+import { useMediaQuery } from "react-responsive";
 
 const ProductViewer = () => {
   const { color, scale, setColor, setScale } = useMacbookStore();
+
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
-
-  // Raw store scale used to decide 14 vs 16
-  const rawScale = scale;
-
-  // Display scale can be adjusted for mobile without breaking logic
-  const displayScale = isMobile ? scale - 0.03 : scale;
 
   return (
     <section id="product-viewer" className="product-viewer">
@@ -38,7 +35,7 @@ const ProductViewer = () => {
 
           <div className="product-viewer__size-controls">
             <div
-              onClick={() => setScale(0.08)} // 14"
+              onClick={() => setScale(0.08)}
               className={`product-viewer__size ${
                 scale === 0.08 ? "product-viewer__size--active" : ""
               }`}
@@ -46,7 +43,7 @@ const ProductViewer = () => {
               14&quot;
             </div>
             <div
-              onClick={() => setScale(0.1)} // 16"
+              onClick={() => setScale(0.1)}
               className={`product-viewer__size ${
                 scale === 0.1 ? "product-viewer__size--active" : ""
               }`}
@@ -63,8 +60,7 @@ const ProductViewer = () => {
       >
         <StudioLights />
         <ModelSwitcher
-          rawScale={rawScale}
-          displayScale={displayScale}
+          scale={isMobile ? scale - 0.03 : scale}
           isMobile={isMobile}
         />
       </Canvas>

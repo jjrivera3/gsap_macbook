@@ -1,0 +1,43 @@
+#showcase {
+  position: relative;
+
+  .media {
+    position: relative;
+    overflow: hidden;
+
+    video {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Overlayed mask image we animate (tutorial-style) */
+    .mask {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+      pointer-events: none;
+
+      img {
+        height: 100%;
+        /* tutorial sometimes uses a matrix transform; scale is easier with GSAP */
+        transform: scale(2.2); /* will be overridden by gsap.set on mount */
+        will-change: transform;
+      }
+    }
+  }
+
+  .content {
+    position: relative;
+    z-index: 3; /* above video + mask */
+    /* your existing classes:
+       my-5 lg:-mt-40 bg-black font-semibold text-xl text-dark-100 lg:opacity-0
+       are already applied; gsap sets opacity/y at runtime */
+  }
+}
